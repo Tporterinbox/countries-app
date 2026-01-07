@@ -1,0 +1,187 @@
+/* imports and Loads the Nunito Sans font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap");
+
+
+
+/* --GLOBAL -- */
+/* Forces padding and borders to be included in element width/height, Prevents layout overflow issues, Best practice for modern layouts  */
+* {
+  box-sizing: border-box;
+}
+
+/* Removes default browser margin  and sets it to zero, Sets the background color, 
+Applies Nunito Sans font to the entire app */
+body { 
+  margin: 0;
+  cursor: pointer;
+  background-color: #fafafa;
+  font-family: "Nunito Sans";
+}
+
+
+/* ---HEADER --- 
+Creates a white header bar, Adds a soft shadow under the header, Uses Flexbox to: Push title left and Push  the other link  to the right
+Adds spacing inside the header */
+.header {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2.0rem;
+}
+
+
+/* Removes underline from links using text-decoration:none, Makes the links inherit text color, 
+Keeps pointer cursor on hover */
+.header h1 a,
+.header p a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+
+
+/* ---HIDDEN NAV Bar--- 
+Hides the old navigation menu, Keeps it in the DOM but not visible, replaced this nav bar with the header links*/
+.nav {
+  display: none;
+}
+
+
+
+/* --- CARDS GRID --- This is the Grid For Country Cards
+Uses CSS Grid for card layout, Shows 4 cards per row on large screens, 1fr makes columns equal width ,
+gap controls spacing between cards, Padding adds space around the grid*/
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* ALWAYS 4 per row */
+  gap: 40px;
+  padding: 20px;
+}
+
+
+
+/* ---CARD LINK ---
+Makes the entire card clickable, Removes underline from the link, 
+Keeps text color consistent/inherited  */
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ---CARD --- This is for the card styling 
+ makes all cards the same height, White card background,Rounded corners, 
+ Darker shadow around the card, overflow:hidden--prevents image overflow, 
+ Flexbox stacks the image and text vertically 
+   Top margin adds vertical spacing*/
+.card {
+  height: 410px; /* SAME HEIGHT FOR ALL */
+  background-color: #fff;
+  border-radius: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* transition: box-shadow 0.25s ease; */
+  margin-top: 40px;
+ 
+}
+
+
+/* Darkens the shadow on hover, Keeps the card from moving, 
+Creates a subtle focus effect */
+.card:hover {
+  
+  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); */
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5); /* darker border on hover */
+  transform: none; /* no movement */
+}
+
+
+
+/* ---- CARD IMAGE --- This is for the Card Flags at the top of the cards
+Image fills the card width, Keeps original image proportions,
+ contain prevents distortion or cropping, Removes inline spacing issues 
+ Rounds only the top corners, Adds a subtle shadow around the flag,*/
+ .card-logo {
+  width: 100%;              /* FULL CARD WIDTH */
+   height: auto;           /* SAME HEIGHT */ 
+   object-fit: contain;  
+  display: block;
+  border-radius: 10px 10px 0 0; /*rounded top corners only*/
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25); /*subtle light shadow around logo*/
+ }  
+
+
+
+
+/* -----CARD CONTENT ----
+ Adds spacing inside the card, Stacks text vertically, flex-grow: 1 fills remaining space
+ Ensures consistent font, Slight left offset for visual balance*/
+.card-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-family: Nunito Sans;
+  margin-left: 10px
+}
+
+
+
+/* ----- CARD TEXT ---- for <h2> on the card 
+Removes default top margin, Adds spacing below title, 
+ Sets  heading font-size*/
+.card-content h2 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+ 
+}
+
+
+/* ---CARD TEXT--- for <p> on the card
+ Removes paragraph spacing gaps, Uses light font weight for clean look, 
+ Keeps text compact and readable */ 
+.card-content p {
+  margin: 0px 0;
+  font-size: 1rem;
+  /* font: size 15px; */
+  font-weight: 200;
+}
+
+
+/* For Tablet or small desktop viewing, Switches to 3 cards per row  */
+@media (max-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* For Tablet or landscape phone viewing, Switches to 2 cards per row  */
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/*Mobile screens, Shows 1 card per row */
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* THIS IS FOR THE TITLES "COUNTRY DETAIL" AND "SAVED COUNTRIES"
+ Styles page headings for Country Detail Page and  Saved Countries Page */
+.Titles{
+  margin-left: 15px;
+  padding:20px;
+  font-size: small;
+
+} 
