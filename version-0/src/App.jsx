@@ -8,9 +8,9 @@
 import { Routes, Route, Link } from "react-router-dom";
 
 // Imports page components
-import Home from "./Pages/Home";
-import SavedCountries from "./Pages/SavedCountries";
-import CountryDetail from "./Pages/CountryDetail";
+import Home from "../Pages/Home";
+import SavedCountries from "../Pages/SavedCountries";
+import CountryDetail from "../Pages/CountryDetail";
 // Imports global CSS styles
 import "./App.css";
 

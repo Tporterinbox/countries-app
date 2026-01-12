@@ -40,8 +40,8 @@
 // --------------------------------------
 
 import { useState } from "react";
-import localData from "../Data/localData";
-import CountryCard from "../Components/CountryCard";
+import localData from "../src/Data/localData";
+import CountryCard from "../src/Components/CountryCard";
 
 export default function Home() {
   const [countries] = useState(
