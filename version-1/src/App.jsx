@@ -50,10 +50,11 @@ function App() {
 
       {/* PAGE ROUTES , This <Routes> Wrapper that holds all route definitions
       Route Path= The URL   Element= The component that will be rendered*/}
+      {/* :countryName   makes the route dynamic and shows on browser*/}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SavedCountries" element={<SavedCountries />} />
-        <Route path="/CountryDetail" element={<CountryDetail />} />
+        <Route path="/CountryDetail:countryName" element={<CountryDetail />} />
       </Routes>
     </div>    
   );
