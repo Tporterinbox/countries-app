@@ -1,10 +1,13 @@
+import { useParams } from "react-router-dom";
 
 
 // Exporting this function as the default export
 // This allows other files (like App.jsx) to import it without curly braces
 export default function CountryDetail() {
 
-
+    const countryName= useParams().countryName;
+    console.log(countryName);
+  
 
      // The Return component returns JSX (what shows on the page)
     return (

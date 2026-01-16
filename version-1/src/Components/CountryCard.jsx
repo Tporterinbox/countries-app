@@ -1,15 +1,13 @@
 
 // Import Link to navigate between pages without reload
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // CountryCard is  rendering  one "country"
 function CountryCard({ country }) {
-  const countryName= useParams().countryName;
-  console.log(countryName);
-
+  
   return (
     // The <link to > makes the entire card is clickable
-    <Link to={`/CountryDetail${countryName}`} className="card-link">
+    <Link to={`/CountryDetail/${country.name.common}`} className="card-link">
       <article className="card">
 
         {/* Country flag */}

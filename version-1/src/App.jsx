@@ -54,7 +54,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SavedCountries" element={<SavedCountries />} />
-        <Route path="/CountryDetail:countryName" element={<CountryDetail />} />
+        <Route path="/CountryDetail/:countryName" element={<CountryDetail />} />
       </Routes>
     </div>    
   );
