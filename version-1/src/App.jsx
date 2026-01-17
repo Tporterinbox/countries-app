@@ -32,10 +32,10 @@ function App() {
       );
       // API function returns data here
       const apiData = await apiResponse.json();
-      return apiData; // ✅ REQUIRED
+      return apiData; // REQUIRED
     } catch (error) {
       console.log(error);
-      return []; // ✅ safe fallback
+      return []; // safe fallback
     }
   };
   
