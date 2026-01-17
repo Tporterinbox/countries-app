@@ -1,3 +1,4 @@
+// CountryCard.jsx → display one country per card
 
 // Import Link to navigate between pages without reload
 import { Link } from "react-router-dom";

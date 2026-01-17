@@ -1,68 +1,47 @@
-// // Import useState so we can store and manage component state, allow me to Filter countries-and make updates
-// import { useState } from "react";
-// // Import local country data (array of country objects) from countries data located on localData Page
-// import localData from "../Data/localData";
-// // Import the CountryCard component that displays the cards
-// import CountryCard from "../Components/CountryCard";
+// Home page displays the data, Diplays List
 
-
-
-
-
-// // Home page component
-// export default function Home() {
-
-//   // useState creates state called "countries"
-//   // It is initialized with localData sorted alphabetically by country name
-//   // usestate variable and setter function --- with countries sorted alphabetically by name.common
-//   //  [...localData]--Creates a copy of the array, Prevents modifying the original data, 
-
-//   const [countries, setCountries] = useState(
-//     [...localData].sort((a, b) => a.name.common.localeCompare(b.name.common))
-//   );
-
-//   // JSX returned by the Home component
-//   return (
-
-//     // <main> is a semantic HTML element for main page content
-//     // className="page" is used for page-level styling
-//     <main className="page">
-
-
-//      {/* Render the CountryCard component */}
-//       {/* Pass the countries state as a prop */}
-//       <CountryCard countries={countries} />
-//     </main>
-//   );
-// }
-
-
-// --------------------------------------
-
-import { useState } from "react";
-import localData from "../src/Data/localData";
+// Imports the reusable card component.
+// Each country will be displayed using CountryCard component
 import CountryCard from "../src/Components/CountryCard";
 
-export default function Home() {
-  const [countries] = useState(
-    [...localData].sort((a, b) =>
-      a.name.common.localeCompare(b.name.common)
-    )
+// Declares the Home component
+// Uses destructuring to receive the "countries" prop from App.jsx
+export default function Home({ countries }) {
+
+  // Creates a copy of the countries array
+  // Sort countries alphabetically by name
+  const sortedCountries = [...countries].sort((a, b) =>
+    a.name.common.localeCompare(b.name.common)
   );
 
+  //  Starts and Returns the JSX that will be rendered on the screen
   return (
+
+    //  main represents the main content of the page
     <main className="page">
 
-      {/* GRID goes here */}
+      {/* className Cards Groups all country cards together
+      and is styled as a grid in CSS, card styling  */}
       <section className="cards">
-        {countries.map((country) => (
+
+        {/* This Loop, 
+        Loops through the sorted countries array--> 
+        Loops over countries, Runs once per country 
+        Sends each country to CountryCard */}
+        {sortedCountries.map((country) => (
+
+          // "CountryCard" Renders one CountryCard per country
+          // key helps React track list items efficiently
+          //  country={country} -->Passes the entire country object as a prop
           <CountryCard
-            key={country.name.common}
+            key={country.cca3}
             country={country}
           />
-        ))}
-      </section>
 
+          // ))} --> Ends the .map() loop 
+        ))}
+
+      </section>
     </main>
   );
 }

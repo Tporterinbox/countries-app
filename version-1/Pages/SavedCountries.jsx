@@ -7,7 +7,7 @@ import { useState } from 'react';
 // Imports the useState Hook from React
 // useState lets this component store and update data (state)
 // Export default ---> Exports the default function component named SavedCountries
-export default function SavedCountries() {
+export default function SavedCountries(countriesData) {
   
   // starts State
   // Creates state  variable called formData and a setter function called setFormData to update it
@@ -19,6 +19,7 @@ export default function SavedCountries() {
     country: '',
     bio: '',
   });
+  
 
   //  This function handles typing in input area on the form 
   // This function runs every time the user types in an input or textarea
