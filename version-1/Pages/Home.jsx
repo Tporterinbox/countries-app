@@ -45,3 +45,74 @@ export default function Home({ countries }) {
     </main>
   );
 }
+
+// ------------------------------------------------
+
+// import { useState } from "react";
+// import CountryCard from "../src/Components/CountryCard";
+
+// export default function Home({ countries }) {
+//   // Search text
+//   const [searchTerm, setSearchTerm] = useState("");
+
+//   // Region filter
+//   const [selectedRegion, setSelectedRegion] = useState("");
+
+//   // Filter + sort
+//   const filteredCountries = [...countries]
+//     .filter((country) =>
+//       country.name.common
+//         .toLowerCase()
+//         .includes(searchTerm.toLowerCase())
+//     )
+//     .filter((country) =>
+//       selectedRegion === ""
+//         ? true
+//         : country.region === selectedRegion
+//     )
+//     .sort((a, b) =>
+//       a.name.common.localeCompare(b.name.common)
+//     );
+
+//   return (
+//     <main className="page">
+
+//       {/*  SEARCH + REGION FILTER */}
+//       <div className="filters">
+
+//         {/* SEARCH */}
+//         <input
+//           type="text"
+//           placeholder="Search for a country..."
+//           value={searchTerm}
+//           onChange={(e) => setSearchTerm(e.target.value)}
+//         />
+
+//         {/* REGION DROPDOWN */}
+//         <select
+//           value={selectedRegion}
+//           onChange={(e) => setSelectedRegion(e.target.value)}
+//         >
+//           <option value="">Filter by Region</option>
+//           <option value="Africa">Africa</option>
+//           <option value="Americas">Americas</option>
+//           <option value="Asia">Asia</option>
+//           <option value="Europe">Europe</option>
+//           <option value="Oceania">Oceania</option>
+//         </select>
+
+//       </div>
+
+//       {/* COUNTRY CARDS */}
+//       <section className="cards">
+//         {filteredCountries.map((country) => (
+//           <CountryCard
+//             key={country.cca3}
+//             country={country}
+//           />
+//         ))}
+//       </section>
+
+//     </main>
+//   );
+// }

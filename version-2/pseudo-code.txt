@@ -1,0 +1,174 @@
+==================================
+🧠 VERSION 2 PSEUDO-CODE WORKSHEET
+==================================
+
+This is our WHAT, WHEN, WHERE, HOW framework for working with data:
+
+1. WHAT data should we store & retrieve?
+   What kind of HTTP request do we need to send, and to what API endpoint?
+   If we are sending a POST request, what do we need to send in the request body, and what is the data type?
+   What would we get back in the response, and what is the data t ype?
+
+2. WHEN should we store & retrieve the data?
+   What event or user action is the trigger, such as clicking a button, submitting a form, or loading a page?
+
+3. WHERE does this happen in the code?
+   What component, page or function?
+
+4. HOW do we accomplish this?
+   What steps do we need to take?
+   Do we need to...
+   - make any GET or POST requests to an API endpoint?
+   - render anything in JSX?
+   - make any functions? If so, when would we call those functions?
+   - use any useState or useEffect hooks?
+     Remember: This is pseudo-code. Don't write code yet — just outline the actions in plain language.
+
+✨ YOUR TASK: Fill in the answers to each WHAT/WHEN/WHERE/HOW question below for the 3 pieces of data.
+
+==================================
+📊 FORM DATA
+==================================
+
+========================
+🔶 STORING FORM DATA
+========================
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): --> Post
+API ENDPOINT: -->save-one-country
+
+REQUEST BODY DATA TYPE (if applicable): --> object
+REQUEST BODY (if applicable): ------
+{
+  "country_name": "Brazil"
+}
+
+RESPONSE DATA TYPE: ------ string
+RESPONSE: ------Success! The country is saved.
+
+❓ WHEN: ------
+❓ WHERE: ------ 
+❓ HOW:
+Step 1: ------
+Step 2: ------
+Step 3: ------
+Add more steps as needed!
+
+
+========================/------------------
+🔶 RETRIEVING FORM DATA
+========================
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): ----> GET
+API ENDPOINT: -->  /get-newest-user
+
+REQUEST BODY DATA TYPE (if applicable): --N/A
+REQUEST BODY (if applicable): ----N/A
+
+RESPONSE DATA TYPE: ---> array with one object
+RESPONSE: ------[
+  [
+  {
+    "user_id": 42,
+    "name": "John Smith",
+    "country_name": "Canada",
+    "email": "john@example.com",
+    "bio": "Another bio"
+  }
+]
+
+❓ WHEN: ------when the saved countries page loads
+
+❓ WHERE: ------ On the saved countries page
+
+❓ HOW:
+Step 1: ---  user fills out form and submits it
+Step 2: ----Make a functiin called getNewsetUserData- async function-, uses fetch to send get request to the endpoint called /get-newest-user. Then the function saves the data to a state variable called newestUserData
+Step 3: ------we will use useEffect to call the function getNewestData on page loading
+step 4:Render the newest user's name to the screen in JSX.
+Add more steps as needed!
+
+
+
+===================================/---------
+📊 SAVED COUNTRIES DATA
+===================================
+
+========================
+🔶 STORING SAVED COUNTRIES DATA
+========================
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): ------
+API ENDPOINT: ------
+
+REQUEST BODY DATA TYPE (if applicable): ------
+REQUEST BODY (if applicable): ------
+
+RESPONSE DATA TYPE: ------
+RESPONSE: ------
+
+❓ WHEN: ------
+
+❓ WHERE: ------
+
+❓ HOW:
+Step 1: ------
+Step 2: ------
+Step 3: ------
+Add more steps as needed!
+
+========================
+🔶 RETRIEVING SAVED COUNTRIES DATA
+========================
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): ------
+API ENDPOINT: ------
+
+REQUEST BODY DATA TYPE (if applicable): ------
+REQUEST BODY (if applicable): ------
+
+RESPONSE DATA TYPE: ------
+RESPONSE: ------
+
+❓ WHEN: ---->
+
+❓ WHERE: ---->
+
+❓ HOW:
+Step 1: ------
+Step 2: ------
+Step 3: ------
+Add more steps as needed!
+
+=================================
+📊 COUNTRY COUNTS DATA
+=================================
+
+========================
+🔶 STORING & RETRIEVING COUNTRY COUNTS DATA
+========================
+NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): ------
+API ENDPOINT: ------
+
+REQUEST BODY DATA TYPE (if applicable): ------
+REQUEST BODY (if applicable): ------
+
+RESPONSE DATA TYPE: ------
+RESPONSE: ------
+
+❓ WHEN: ------
+
+❓ WHERE: ------
+
+❓ HOW:
+Step 1: ------
+Step 2: ------
+Step 3: ------
+Add more steps as needed!

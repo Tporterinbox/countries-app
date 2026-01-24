@@ -1,47 +1,73 @@
-// Home page displays the data, Diplays List
 
-// Imports the reusable card component.
-// Each country will be displayed using CountryCard component
+// ---------------------------------
+
+// Home.jsx
+// Displays list of countries with Search + Region Filter
+
+import { useState } from "react";
 import CountryCard from "../src/Components/CountryCard";
 
-// Declares the Home component
-// Uses destructuring to receive the "countries" prop from App.jsx
 export default function Home({ countries }) {
+  //  Search input state
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Creates a copy of the countries array
-  // Sort countries alphabetically by name
-  const sortedCountries = [...countries].sort((a, b) =>
-    a.name.common.localeCompare(b.name.common)
-  );
+  //  Region filter state
+  const [selectedRegion, setSelectedRegion] = useState("");
 
-  //  Starts and Returns the JSX that will be rendered on the screen
+  // Filter + sort countries
+  const filteredCountries = [...countries]
+    // Search by country name
+    .filter((country) =>
+      country.name.common
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
+    )
+    // Filter by region
+    .filter((country) =>
+      selectedRegion
+        ? country.region === selectedRegion
+        : true
+    )
+    // Sort alphabetically
+    .sort((a, b) =>
+      a.name.common.localeCompare(b.name.common)
+    );
+
   return (
-
-    //  main represents the main content of the page
     <main className="page">
 
-      {/* className Cards Groups all country cards together
-      and is styled as a grid in CSS, card styling  */}
+      {/*  SEARCH + REGION FILTER */}
+      <div className="filters">
+        <input
+          type="text"
+          placeholder="Search for a country..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        <select
+          value={selectedRegion}
+          onChange={(e) => setSelectedRegion(e.target.value)}
+        >
+          <option value="">Filter by Region</option>
+          <option value="Africa">Africa</option>
+          <option value="Americas">Americas</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
+        </select>
+      </div>
+
+      {/*  Country Cards */}
       <section className="cards">
-
-        {/* This Loop, 
-        Loops through the sorted countries array--> 
-        Loops over countries, Runs once per country 
-        Sends each country to CountryCard */}
-        {sortedCountries.map((country) => (
-
-          // "CountryCard" Renders one CountryCard per country
-          // key helps React track list items efficiently
-          //  country={country} -->Passes the entire country object as a prop
+        {filteredCountries.map((country) => (
           <CountryCard
             key={country.cca3}
             country={country}
           />
-
-          // ))} --> Ends the .map() loop 
         ))}
-
       </section>
+
     </main>
   );
 }
