@@ -36,16 +36,19 @@ This is our WHAT, WHEN, WHERE, HOW framework for working with data:
 
 ❓ WHAT...
 TYPE OF HTTP REQUEST (GET OR POST): --> Post
-API ENDPOINT: -->save-one-country
+API ENDPOINT: -->add-one-user
 
 REQUEST BODY DATA TYPE (if applicable): --> object
 REQUEST BODY (if applicable): ------
 {
-  "country_name": "Brazil"
+  "name": "Alice",
+  "country_name": "Germany",
+  "email": "alice@example.com",
+  "bio": "A little about Alice"
 }
 
 RESPONSE DATA TYPE: ------ string
-RESPONSE: ------Success! The country is saved.
+RESPONSE: ------Success! User has been added.
 
 ❓ WHEN: ------
 ❓ WHERE: ------ 
@@ -96,19 +99,23 @@ Add more steps as needed!
 📊 SAVED COUNTRIES DATA
 ===================================
 
-========================
+========================---------------------------------
 🔶 STORING SAVED COUNTRIES DATA
-========================
+========================---------------------------------
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): ----> Post 
+API ENDPOINT: ---->  /save-one-country
 
-REQUEST BODY DATA TYPE (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): ---->object
 REQUEST BODY (if applicable): ------
+{
+  "country_name": "Brazil"
+}
 
-RESPONSE DATA TYPE: ------
+RESPONSE DATA TYPE: ------> string 
 RESPONSE: ------
+Success! The country is saved.
 
 ❓ WHEN: ------
 
@@ -125,14 +132,23 @@ Add more steps as needed!
 ========================
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): ---> Get 
+API ENDPOINT: ------/get-all-saved-countries
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): -> N/A
+REQUEST BODY (if applicable): ------N/A
 
-RESPONSE DATA TYPE: ------
+
+RESPONSE DATA TYPE: ------array of objects
 RESPONSE: ------
+[
+  {
+    "country_name": "Japan"
+  },
+  {
+    "country_name": "Germany"
+  }
+]
 
 ❓ WHEN: ---->
 
@@ -154,15 +170,20 @@ Add more steps as needed!
 NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): ------Post 
+API ENDPOINT: ------> /update-one-country-count
 
-REQUEST BODY DATA TYPE (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): ------> Object 
 REQUEST BODY (if applicable): ------
+{
+  "country_name": "France"
+}
 
-RESPONSE DATA TYPE: ------
+RESPONSE DATA TYPE: ------> string, with boolean --??
 RESPONSE: ------
-
+{
+  "count": 3
+}
 ❓ WHEN: ------
 
 ❓ WHERE: ------

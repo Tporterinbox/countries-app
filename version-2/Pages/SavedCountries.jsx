@@ -1,135 +1,143 @@
-// Imports the useState Hook from React using this react hook
-// useState lets this component store and update data (state)
-import { useState } from 'react';
 
 
+import { useState, useEffect } from "react";
+// import "./app.css";
 
-// Imports the useState Hook from React
-// useState lets this component store and update data (state)
-// Export default ---> Exports the default function component named SavedCountries
-export default function SavedCountries(countriesData) {
-  
-  // starts State
-  // Creates state  variable called formData and a setter function called setFormData to update it
-  // useState initializes the form with empty strings
-  // Each key represents a form field
- const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    country: '',
-    bio: '',
+function SavedCountries() {
+  // Holds current form state
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    country: "",
+    bio: "",
   });
-  
 
-  //  This function handles typing in input area on the form 
-  // This function runs every time the user types in an input or textarea
-  // [name]: value,--- is dynamic and allows fields to be updated 
-  function handleChange(event) {
-    // Destructures the name and value from the element that triggered the event
-    // name = input's name attribute (fullName, email, etc.)
-    // value = what the user typed
-    const { name, value,} = event.target;
-    // Updates the formData state
-    setFormData((prevFormData) => ({
-      // Copies all previous form values
-      ...prevFormData,
-      // Updates only the field that changed
-      // [name] is dynamic (example: fullName, email, country, bio)
-      [name]: value,
-    }));
-    // Logs the current formData to the console
-    // Note: This will show the previous state due to async updates
-    console.log(formData);
-   
-  }
+  // Holds newest user from the backend
+  const [newestUserData, setNewestUserData] = useState(null);
 
+  // Handles typing in inputs
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-  // This function handles form submit and runs when theform is submitted by the user
-  function handleSubmit(event) {
-    // Prevents the browser from refreshing the page
-    event.preventDefault();
-    // Logs the submitted form data
-    console.log('Form Submitted:', formData);
+  // GET newest user from backend
+  const getNewestUserData = async () => {
+    try {
+      const response = await fetch(
+        "https://backend-answer-keys.onrender.com/get-newest-user",
+        { method: "GET" }
+      );
 
-    // resets the form
-    // Resets all form fields back to empty strings
-    setFormData({fullName: '', email: '', country: '',  bio: '', });
-  }
+      const data = await response.json();
+      const userData = data[0];
 
+      setNewestUserData({
+        fullName: userData.name,
+        email: userData.email,
+        country: userData.country_name,
+        bio: userData.bio,
+      });
+    } catch (error) {
+      console.error("Fetch newest user error:", error);
+    }
+  };
 
-    // The  return component returns JSX that appears on the screen
-    return (
-      <>
-       {/* React Fragment – groups elements without adding extra HTML */}
-      
-      {/* section --> groups related form code, className from allows for CSS styling */}
+  // POST form data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await fetch(
+        "https://backend-answer-keys.onrender.com/add-one-user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.fullName,
+            email: formData.email,
+            country_name: formData.country,
+            bio: formData.bio,
+          }),
+        }
+      );
+
+      // Reset form
+      setFormData({
+        fullName: "",
+        email: "",
+        country: "",
+        bio: "",
+      });
+
+      // Refresh welcome message
+      getNewestUserData();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
+
+  // Load newest user on page load
+  useEffect(() => {
+    getNewestUserData();
+  }, []);
+
+  return (
+    <>
+      {/* Welcome message above the form */}
+      {newestUserData && (
+        <h2 className="welcome-message">
+          Welcome, {newestUserData.fullName}!
+        </h2>
+      )}
+
       <section className="Form">
+        <h2>My Profile</h2>
 
-      {/* // <main> --> is a  HTML element for primary/main content on the page*/}
-     {/* // className="Titles" --> allows for styling the headings in CSS */}
-     <main className="Titles">
-       {/* Displays the text "My Saved Countries" and "my profile" on the page with a <h2>heading*/}
-      <h2>My Saved Countries</h2>
-      <h2> My Proile </h2>
-      </main>
+        <form onSubmit={handleSubmit} name="my-profile">
+          <input
+            type="text"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleInputChange}
+            placeholder="Full name"
+            required
+          />
 
-  
-      {/* onSubmit ----> is a React "EVENT"  attribute that listens for The event 
-       and tells react when to call the function called handleSubmit
-        handleSubmit ----> is the function that handles the form submission */}
-        {/* this line of code connects the form to that function: */}
-      <form onSubmit={handleSubmit}>
-      
-      {/* This is the "name" input  */}
-      {/* OnChange={handleChange}-->allows typing on the form  */}
-        <input
-        // This is the "Text "input field, type describes the type of input.
-          type="text"    
-          // Matches formData.fullName
-          name="fullName" 
-          // Hint text that tells the user what info goes into the name input area
-          placeholder="Full Name"
-          // value={formData.fullName} is Controlled value from state, 
-          value={formData.fullName}
-          // Allows typing, handleChange runs every time the user types in an input or textarea
-          onChange={handleChange} 
-        /> 
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="Email"
+            required
+          />
 
-         {/* Email Input area*/}
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        /> 
+          <input
+            type="text"
+            name="country"
+            value={formData.country}
+            onChange={handleInputChange}
+            placeholder="Country"
+            required
+          />
 
-        {/* Country Input area*/}
-        <input
-          type="text"
-          name="country"
-          placeholder="Country"
-          value={formData.country}
-          onChange={handleChange}
-        /> 
+          <input
+            type="text"
+            name="bio"
+            value={formData.bio}
+            onChange={handleInputChange}
+            placeholder="Bio"
+            required
+          />
 
-
-        {/* Bio input area */}
-        <textarea
-          type= "text"
-          name="bio"
-          placeholder="Bio"
-          value={formData.bio}
-          onChange={handleChange}
-        /> 
-    
-        
-     {/* Form submit button */}
-     <button type="submit">Submit</button>
-      </form>
-
+          <button type="submit">Submit</button>
+        </form>
       </section>
-     </>
-     );
-   
+    </>
+  );
 }
+
+export default SavedCountries;
