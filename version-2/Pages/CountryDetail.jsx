@@ -1,87 +1,250 @@
 
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-export default function CountryDetail({ country }) {
-  const navigate = useNavigate();
+// import { useState } from "react";
+// import { useParams, useNavigate, Link } from "react-router-dom";
 
-  // State to track if user has saved this country
+// export default function CountryDetail({ countries }) {
+//   const { countryName } = useParams();
+//   const navigate = useNavigate();
+
+//   // Find the selected country from the countries array
+//   const country = countries.find(
+//     (c) => c.name.common === countryName
+//   );
+
+//   // Guard: prevents crash while data loads
+//   if (!country) {
+//     return <p style={{ padding: "20px" }}>Loading country details...</p>;
+//   }
+
+//   // State for save feedback
+//   const [isSaved, setIsSaved] = useState(false);
+//   const [message, setMessage] = useState("");
+
+//   // Save country to backend
+//   async function handleSave() {
+//     try {
+//       const response = await fetch(
+//         "https://your-backend-api.com/saved-countries",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify({
+//             country: country.name.common,
+//           }),
+//         }
+//       );
+
+//       if (!response.ok) {
+//         throw new Error("Failed to save country");
+//       }
+
+//       setIsSaved(true);
+//       setMessage("Country saved successfully!");
+//     } catch (error) {
+//       console.error(error);
+//       setMessage("Error saving country");
+//     }
+//   }
+
+//   return (
+//     <div>
+//       {/* Back Button */}
+//       <button
+//         className="back-button"
+//         onClick={() => navigate(-1)}
+//       >
+//         Back
+//       </button>
+
+//       {/* Flag + Details Layout */}
+//       <div className="country-detail-container">
+//         {/* Flag on the LEFT */}
+//         <img
+//           src={country.flags.png}
+//           alt={`Flag of ${country.name.common}`}
+//           className="country-flag"
+//         />
+
+//         {/* Details on the RIGHT */}
+//         <div className="country-details">
+//           <h2>{country.name.common}</h2>
+
+//           <p><strong>Region:</strong> {country.region}</p>
+//           {country.subregion && (
+//             <p><strong>Subregion:</strong> {country.subregion}</p>
+//           )}
+//           <p>
+//             <strong>Population:</strong>{" "}
+//             {country.population.toLocaleString()}
+//           </p>
+
+//           {/* Save Button */}
+//           {!isSaved ? (
+//             <button
+//               className="back-button"
+//               onClick={handleSave}
+//               style={{ marginTop: "15px" }}
+//             >
+//               Save Country
+//             </button>
+//           ) : (
+//             <p style={{ color: "green", marginTop: "10px" }}>
+//               {message}
+//             </p>
+//           )}
+
+//           {/* Bordering Countries */}
+//           {country.borders && country.borders.length > 0 && (
+//             <div className="border-countries">
+//               <h4>Bordering Countries:</h4>
+
+//               <div className="border-buttons">
+//                 {country.borders.map((borderCode) => {
+//                   const borderCountry = countries.find(
+//                     (c) => c.cca3 === borderCode
+//                   );
+
+//                   return (
+//                     borderCountry && (
+//                       <Link
+//                         key={borderCode}
+//                         to={`/CountryDetail/${borderCountry.name.common}`}
+//                         className="border-button"
+//                       >
+//                         {borderCountry.name.common}
+//                       </Link>
+//                     )
+//                   );
+//                 })}
+//               </div>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+// ------------------------------
+
+import { useState } from "react";
+import { useParams, Link } from "react-router-dom";
+
+export default function CountryDetail({ countries }) {
+  const { countryName } = useParams();
+
+  // Find the selected country from the countries array
+  const country = countries.find(
+    (c) => c.name.common === countryName
+  );
+
+  // Prevent crash while data is loading
+  if (!country) {
+    return <p style={{ padding: "20px" }}>Loading country details...</p>;
+  }
+
+  // State for save feedback
   const [isSaved, setIsSaved] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Function to handle saving the country
+  // Save country to backend
   async function handleSave() {
     try {
-      const response = await fetch("https://your-backend-api.com/saved-countries", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fullName: "Anonymous User", // You could replace this with actual user info
-          country: country.name.common,
-        }),
-      });
+      const response = await fetch(
+        "https://your-backend-api.com/saved-countries",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            country: country.name.common,
+          }),
+        }
+      );
 
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok) {
+        throw new Error("Failed to save country");
+      }
 
-      const result = await response.json();
-      console.log("Country saved:", result);
       setIsSaved(true);
-      setMessage(`Country ${country.name.common} saved successfully!`);
+      setMessage("Country saved successfully!");
     } catch (error) {
-      console.error("Error saving country:", error);
-      setMessage("Failed to save country.");
+      console.error(error);
+      setMessage("Error saving country");
     }
   }
 
   return (
     <div>
       {/* Back Button */}
-      <button className="back-button" onClick={() => navigate("/")}>
+      <Link to="/" className="back-button">
         Back
-      </button>
+      </Link>
 
+      {/* Flag + Details Layout */}
       <div className="country-detail-container">
-        {/* Flag */}
+        {/* Flag on the LEFT */}
         <img
           src={country.flags.png}
           alt={`Flag of ${country.name.common}`}
           className="country-flag"
         />
 
-        {/* Country Details */}
+        {/* Details on the RIGHT */}
         <div className="country-details">
           <h2>{country.name.common}</h2>
-          <p>Region: {country.region}</p>
-          <p>Subregion: {country.subregion}</p>
-          <p>Population: {country.population.toLocaleString()}</p>
+
+          <p><strong>Region:</strong> {country.region}</p>
+          {country.subregion && (
+            <p><strong>Subregion:</strong> {country.subregion}</p>
+          )}
+          <p>
+            <strong>Population:</strong>{" "}
+            {country.population.toLocaleString()}
+          </p>
 
           {/* Save Button */}
           {!isSaved ? (
-            <button className="back-button" onClick={handleSave}>
+            <button
+              className="back-button"
+              onClick={handleSave}
+              style={{ marginTop: "15px" }}
+            >
               Save Country
             </button>
           ) : (
             <p style={{ color: "green", marginTop: "10px" }}>
-              Country saved!
+              {message}
             </p>
           )}
 
-          {/* Optional success/failure message */}
-          {message && <p style={{ color: "green" }}>{message}</p>}
-
-          {/* Bordering countries */}
+          {/* Bordering Countries */}
           {country.borders && country.borders.length > 0 && (
             <div className="border-countries">
               <h4>Bordering Countries:</h4>
+
               <div className="border-buttons">
-                {country.borders.map((border) => (
-                  <button key={border} className="border-button">
-                    {border}
-                  </button>
-                ))}
+                {country.borders.map((borderCode) => {
+                  const borderCountry = countries.find(
+                    (c) => c.cca3 === borderCode
+                  );
+
+                  return (
+                    borderCountry && (
+                      <Link
+                        key={borderCode}
+                        to={`/CountryDetail/${borderCountry.name.common}`}
+                        className="border-button"
+                      >
+                        {borderCountry.name.common}
+                      </Link>
+                    )
+                  );
+                })}
               </div>
             </div>
           )}

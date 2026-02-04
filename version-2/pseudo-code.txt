@@ -50,8 +50,8 @@ REQUEST BODY (if applicable): ------
 RESPONSE DATA TYPE: ------ string
 RESPONSE: ------Success! User has been added.
 
-❓ WHEN: ------
-❓ WHERE: ------ 
+❓ WHEN: ------When user submits form 
+❓ WHERE: ------ on the SavedCountries Page
 ❓ HOW:
 Step 1: ------
 Step 2: ------
@@ -82,13 +82,14 @@ RESPONSE: ------[
   }
 ]
 
-❓ WHEN: ------when the saved countries page loads
+❓ WHEN: ------when the saved countries page loads because this is the ppage where the form is 
 
 ❓ WHERE: ------ On the saved countries page
 
 ❓ HOW:
-Step 1: ---  user fills out form and submits it
-Step 2: ----Make a functiin called getNewsetUserData- async function-, uses fetch to send get request to the endpoint called /get-newest-user. Then the function saves the data to a state variable called newestUserData
+Step 1: ---  user fills out form and submits it, by clicking submit
+Step 2: ----Make a functiin called getNewsetUserData- async function-, uses fetch to send a get request to the endpoint called /get-newest-user. 
+Then the function saves the data to a state variable called newestUserData
 Step 3: ------we will use useEffect to call the function getNewestData on page loading
 step 4:Render the newest user's name to the screen in JSX.
 Add more steps as needed!
@@ -117,7 +118,7 @@ RESPONSE DATA TYPE: ------> string
 RESPONSE: ------
 Success! The country is saved.
 
-❓ WHEN: ------
+❓ WHEN: ------ When user 
 
 ❓ WHERE: ------
 

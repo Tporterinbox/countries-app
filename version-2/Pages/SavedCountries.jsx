@@ -39,6 +39,8 @@ function SavedCountries() {
       // Calls the fetch() API
       // await pauses execution until the server responds
       // The result is stored in response, it’s the HTTP response object
+      //response contains status, headers, and body (not the data yet)
+
       const response = await fetch(
         // The backend URL endpoint is responsible for returning the newest user
         "https://backend-answer-keys.onrender.com/get-newest-user",
@@ -88,10 +90,10 @@ function SavedCountries() {
         // The backend listens at this route for new users
         "https://backend-answer-keys.onrender.com/add-one-user",
         {
-          // Specifies the HTTP method, "post" means sending new data
+          // Specifies the HTTP method, "post" means sending new data to the server
           // Without this:Backend may reject the request or fail to parse the data
           // necessary and critical for POST requests with JSON
-          // request is reading data-->(GET),
+          // request is reading data-->(POST),
           method: "POST",
           // headers tell the server how to interpret what’s coming
           headers: {
@@ -196,3 +198,4 @@ function SavedCountries() {
 
 // Export component so it can be used in other files
 export default SavedCountries;
+
