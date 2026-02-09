@@ -36,7 +36,9 @@ This is our WHAT, WHEN, WHERE, HOW framework for working with data:
 
 ❓ WHAT...
 TYPE OF HTTP REQUEST (GET OR POST): --> Post
-API ENDPOINT: -->add-one-user
+
+API ENDPOINT-URL: https://backend-answer-keys.onrender.com/add-one-user
+----> endpoint has been added to URL above (add-one-user)
 
 REQUEST BODY DATA TYPE (if applicable): --> object
 REQUEST BODY (if applicable): ------
@@ -51,11 +53,14 @@ RESPONSE DATA TYPE: ------ string
 RESPONSE: ------Success! User has been added.
 
 ❓ WHEN: ------When user submits form 
-❓ WHERE: ------ on the SavedCountries Page
+❓ WHERE: ------ on the SavedCountries Page, the function we write will be called 
+ from the handle submit function
+
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
+Step 1: ------Write a function for storing from data and name it 
+storeUserData()
+Step 2: ------Put a post request in it 
+Step 3: ------Call the form data storing function from handle submit
 Add more steps as needed!
 
 
@@ -88,7 +93,7 @@ RESPONSE: ------[
 
 ❓ HOW:
 Step 1: ---  user fills out form and submits it, by clicking submit
-Step 2: ----Make a functiin called getNewsetUserData- async function-, uses fetch to send a get request to the endpoint called /get-newest-user. 
+Step 2: ----Make a function called getNewsetUserData- async function-, uses fetch to send a get request to the endpoint called /get-newest-user. 
 Then the function saves the data to a state variable called newestUserData
 Step 3: ------we will use useEffect to call the function getNewestData on page loading
 step 4:Render the newest user's name to the screen in JSX.
@@ -115,10 +120,10 @@ REQUEST BODY (if applicable): ------
 }
 
 RESPONSE DATA TYPE: ------> string 
-RESPONSE: ------
-Success! The country is saved.
+RESPONSE: ------>  Success! The country is saved.
 
-❓ WHEN: ------ When user 
+
+❓ WHEN: ------ When user clicks save button 
 
 ❓ WHERE: ------
 
