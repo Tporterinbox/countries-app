@@ -109,6 +109,11 @@ export default function CountryDetail({ countries }) {
             {country.population.toLocaleString()}
           </p>
 
+          <p> 
+          <strong>Capital:</strong>{" "}
+          {country.capital}
+          </p>
+
           {/* Save Button */}
           {!isSaved ? (
             <button
