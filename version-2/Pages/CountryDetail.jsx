@@ -26,7 +26,7 @@ export default function CountryDetail({ countries }) {
   async function handleSave() {
     try {
       const response = await fetch(
-        "https://your-backend-api.com/saved-countries",
+        "https://backend-answer-keys.onrender.com/save-one-country",
         {
           method: "POST",
           headers: {
@@ -43,12 +43,41 @@ export default function CountryDetail({ countries }) {
       }
 
       setIsSaved(true);
+      // saved message show after save button is clicked
       setMessage("Country saved successfully!");
     } catch (error) {
       console.error(error);
       setMessage("Error saving country");
     }
   }
+  // -------------------------------
+
+  //     // Post request for Save-One-Country
+  // const handleSaveCountry = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://backend-answer-keys.onrender.com/save-one-country",
+  //       {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({ country_name: country.name.common }),
+  //       }
+  //     );
+
+  //     if (!response.ok) throw new Error("Failed to save country");
+
+  //     const data = await response.json();
+  //     setIsSaved(true);
+  //     setMessage(data.message || "Success! The country is saved.!");
+
+  //     // Notify parent to refresh saved countries
+  //     if (onCountrySaved) onCountrySaved();
+  //   } catch (error) {
+  //     console.error("Error saving country:", error);
+  //     setMessage("Failed to save country.");
+  //   }
+  // };
+// --------------------------------
 
   return (
     <div>

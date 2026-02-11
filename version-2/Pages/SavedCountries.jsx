@@ -1,13 +1,11 @@
 
-// Import React hooks used for state and and useEffect
 import { useState, useEffect } from "react";
-// import "./app.css";
 
-// This is the SavedCountries React functional component
 function SavedCountries() {
+  // ---------------- UseSTATE for SAVED COUNTRIES ----------------
+  const [savedCountries, setSavedCountries] = useState([]);
 
-  // Holds current form state---this is  "state"
-   // Holds the current values of the form inputs (controlled form)
+  // ---------------- USESTATE  for User Profile----------------
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -15,98 +13,78 @@ function SavedCountries() {
     bio: "",
   });
 
-  // Holds newest user from the backend
-   // Holds the most recently added user fetched from the backend
   const [newestUserData, setNewestUserData] = useState(null);
 
-  // --->INPUT HANDLING <------
-  // Runs every time the user types into an input field
-  // Handles typing in inputs
+  // ---------------- Handle  Input----------------
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Update only the changed field, keep the rest the same
     setFormData({ ...formData, [name]: value });
   };
 
-   // ------> GET REQUEST <-----
+  // ---------------------------------------------------
+    // Post request going on country detail page 
+  // const handleSaveCountry = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://backend-answer-keys.onrender.com/save-one-country",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           country_name: country.name.common,
+  //         }),
+  //       }catch (error) {
+  //         console.error("Error saving countries:", error);
+  //       }
+  //     );
 
-  // GET Fetches newest user from backend
-  const getNewestUserData = async () => {
-    // JavaScript will attempt to run everything inside the "try" block
+    
+  // ---------------- GET REQUEST for  Get-all-SAVED COUNTRIES ----------------
+  const getSavedCountries = async () => {
     try {
-     
-      
-      // Calls the fetch() API
-      // await pauses execution until the server responds
-      // The result is stored in response, it’s the HTTP response object
-      //response contains status, headers, and body (not the data yet)
-
       const response = await fetch(
-        // The backend URL endpoint is responsible for returning the newest user
-        "https://backend-answer-keys.onrender.com/get-newest-user",
-        // Send GET request to backend endpoint, This is where the GET request is sent
-        // request is reading data-->(GET), not sending data like Post does 
-        // Tells the server--“I want to retrieve data”
-        { method: "GET" }
+        "https://backend-answer-keys.onrender.com/get-all-saved-countries"
       );
-      
-       // Convert response to JavaScript object
-      //  Converts the response body from JSON → JavaScript
       const data = await response.json();
-      // Grabs the first (newest) user from the array
-      // backend returns an array of users
-      // Accesses the first element in the array
-      const userData = data[0];
-
-      // useState setter  function
-      // Store formatted data in state for display
-      // Calls the useState setter and Stores user info so JSX can use it
-      setNewestUserData({
-        fullName: userData.name,
-        email: userData.email,
-        country: userData.country_name,
-        bio: userData.bio,
-      });
-       // Log errors if fetch fails, Runs only if something inside try fails
+      setSavedCountries(data);
     } catch (error) {
-      console.error("Fetch newest user error:", error);
+      console.error("Error fetching saved countries:", error);
     }
   };
 
-   // ----> POST REQUEST <----
-  // POST form data, // Runs when the form is submitted
+  // ---------------- GET NEWEST USER ----------------
+  const getNewestUserData = async () => {
+    try {
+      const response = await fetch(
+        "https://backend-answer-keys.onrender.com/get-newest-user",
+      );
+      const data = await response.json();
+      const user = data[0];
+
+      setNewestUserData({
+        fullName: user.name,
+        email: user.email,
+        country: user.country_name,
+        bio: user.bio,
+      });
+    } catch (error) {
+      console.error("Error fetching newest user:", error);
+    }
+  };
+
+  // ---------- POST REQUEST add-one-user / USER PROFILE ----------------
   const handleSubmit = async (e) => {
-    // prevents the default activity from happening
     e.preventDefault();
 
-    // wrapped in a try block
     try {
-       // Send form data to backend,"fetch()" sends an HTTP request
-      // "await" pauses this function until the request finishes 
-      // and This only works because function is an async function
-      // Without await, the code would keep running before the request completes
       await fetch(
-        // This is the API endpoint (URL) I am sending data to
-        // The backend listens at this route for new users
         "https://backend-answer-keys.onrender.com/add-one-user",
         {
-          // Specifies the HTTP method, "post" means sending new data to the server
-          // Without this:Backend may reject the request or fail to parse the data
-          // necessary and critical for POST requests with JSON
-          // request is reading data-->(POST),
           method: "POST",
-          // headers tell the server how to interpret what’s coming
-          headers: {
-            // Tell backend that the request body coming is JSON 
-            "Content-Type": "application/json",
-          },
-
-          // body is the actual data being sent
-          // JSON.stringify- Converts a JavaScript object into a JSON string
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            // Creates a key called "name", 
-            // Its value comes from:formData.fullName (state)
-            // Matches frontend → backend field names
             name: formData.fullName,
             email: formData.email,
             country_name: formData.country,
@@ -115,7 +93,6 @@ function SavedCountries() {
         }
       );
 
-      // Clear the form after successful submit// Resets form
       setFormData({
         fullName: "",
         email: "",
@@ -123,36 +100,48 @@ function SavedCountries() {
         bio: "",
       });
 
-      // Refresh welcome message with newest user
       getNewestUserData();
     } catch (error) {
-      // Log errors if POST fails
-      console.error("Error submitting form:", error);
+      console.error("Error submitting profile:", error);
     }
   };
 
-  // ---------------- UseEffect CYCLE ----------------
-  // Load newest user on page load
-  //  // Runs once when the page loads
+  // ---------------- LOAD DATA- ON PAGE LOAD ----------------
   useEffect(() => {
+    getSavedCountries();   
     getNewestUserData();
-    // Empty dependency array ---> run only once
   }, []);
 
-  // ---------------- JSX (UI) ----------------
+  // ---------------- UI/JSX ----------------
   return (
     <>
-      {/* Welcome message above the form */}
+      {/* WELCOME MESSAGE */}
       {newestUserData && (
         <h2 className="welcome-message">
           Welcome, {newestUserData.fullName}!
         </h2>
       )}
 
+      {/* SAVED COUNTRIES LIST */}
+      <section className="saved-countries">
+        <h2>Saved Countries</h2>
+
+        {savedCountries.length === 0 ? (
+          <p>No saved countries yet.</p>
+        ) : (
+          <ul>
+            {savedCountries.map((country, index) => (
+              <li key={index}>{country.country_name}</li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      {/* PROFILE FORM */}
       <section className="Form">
         <h2>My Profile</h2>
 
-        <form onSubmit={handleSubmit} name="my-profile">
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="fullName"
@@ -196,7 +185,4 @@ function SavedCountries() {
   );
 }
 
-// Export component so it can be used in other files
 export default SavedCountries;
-
-
