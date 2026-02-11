@@ -21,24 +21,6 @@ function SavedCountries() {
     setFormData({ ...formData, [name]: value });
   };
 
-  // ---------------------------------------------------
-    // Post request going on country detail page 
-  // const handleSaveCountry = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       "https://backend-answer-keys.onrender.com/save-one-country",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           country_name: country.name.common,
-  //         }),
-  //       }catch (error) {
-  //         console.error("Error saving countries:", error);
-  //       }
-  //     );
 
     
   // ---------------- GET REQUEST for  Get-all-SAVED COUNTRIES ----------------

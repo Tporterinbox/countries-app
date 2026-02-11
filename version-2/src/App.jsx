@@ -18,36 +18,6 @@ import "./App.css";
 import {useEffect,useState} from 'react';
 // import {localData} from "../Data/localData";
 
-// ----------------------------------
-// this code is from the Post lecture by Phil on 1/26/26
-// const storeUserData= async(data) => {
-// const response = await fetch ('https://backend-answer-keys.onrender.com/add-one-user', 
-//   {
-//     // type of HTTP request
-// method: 'POST',
-// // speciffy the type of data being sent
-// headers:{
-//   "Content-Type": "application/json",
-// },
-// // call on that method to get the data right 
-// // use dot notation to get the correct data
-// // use stringify method  to format data to be sent to the backend
-// body: JSON.stringify ({
-//   name: data.fullName,
-//   country_name: data.country,
-//   email: data.email,
-//   bio: data.bio,
-//  }),
-// }
-// );
-
-// // if the response is text type, then use response.text()
-// // if response is json data, use response.json
-// const result = await response.text();
-// console.log(result)
-// };
-
-// ----------------------------------
 
 // Declares the main React component and is the root of your entire application called App.Jsx
 function App() {
