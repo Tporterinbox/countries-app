@@ -1,6 +1,4 @@
 
-
-
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
@@ -33,7 +31,7 @@ export default function CountryDetail({ countries }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            country: country.name.common,
+            country_name: country.name.common,
           }),
         }
       );
