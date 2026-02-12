@@ -27,7 +27,7 @@ function SavedCountries({ countries }) {
   const getSavedCountries = async () => {
     try {
       const response = await fetch(
-        "https://backend-answer-keys.onrender.com/get-all-saved-countries"
+        "https://backend-answer-keys.onrender.com/api/get-all-saved-countries"
       );
       const data = await response.json();
       setSavedCountries(data);
@@ -40,7 +40,7 @@ function SavedCountries({ countries }) {
   const getNewestUserData = async () => {
     try {
       const response = await fetch(
-        "https://backend-answer-keys.onrender.com/get-newest-user"
+        "https://backend-answer-keys.onrender.com/api/get-newest-user"
       );
       const data = await response.json();
       const user = data[0];
@@ -62,7 +62,7 @@ function SavedCountries({ countries }) {
 
     try {
       await fetch(
-        "https://backend-answer-keys.onrender.com/add-one-user",
+        "https://backend-answer-keys.onrender.com/api/add-one-user",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

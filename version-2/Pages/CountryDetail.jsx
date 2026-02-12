@@ -24,7 +24,7 @@ export default function CountryDetail({ countries }) {
   async function handleSave() {
     try {
       const response = await fetch(
-        "https://backend-answer-keys.onrender.com/save-one-country",
+        "https://backend-answer-keys.onrender.com/api/save-one-country",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -47,7 +47,7 @@ export default function CountryDetail({ countries }) {
   const updateViewCount = async () => {
     try {
       const response = await fetch(
-        "https://backend-answer-keys.onrender.com/update-one-country-count",
+        "https://backend-answer-keys.onrender.com/api/update-one-country-count",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
