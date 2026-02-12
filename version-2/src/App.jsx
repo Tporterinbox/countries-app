@@ -65,7 +65,7 @@ useEffect(() => {
         </p>
       </div>
 
-      {/* HIDDEN NAV (OPTIONAL / DEBUG ONLY)
+      {/* HIDDEN NAV (OPTIONAL / For Debugging only)
       Hidden in  CSS with (display: none) */}
       <div className="nav"> 
         {/* Unordered list for nav links*/}

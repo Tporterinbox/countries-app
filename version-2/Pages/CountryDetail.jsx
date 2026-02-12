@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
@@ -42,7 +43,7 @@ export default function CountryDetail({ countries }) {
     }
   }
 
-  // ------------Post Request -- Update View Count ----------------
+  // ---------------- Update View Count ----------------
   const updateViewCount = async () => {
     try {
       const response = await fetch(
@@ -57,7 +58,7 @@ export default function CountryDetail({ countries }) {
       if (!response.ok) throw new Error("Failed to update country view count");
 
       const data = await response.json();
-      // The backend should return the updated count in data.count
+      // Backend should return updated count in data.count
       setViewCount(data.count || 0);
     } catch (error) {
       console.error("Error updating view count:", error);
@@ -86,13 +87,33 @@ export default function CountryDetail({ countries }) {
 
         <div className="country-details">
           <h2>{country.name.common}</h2>
-          <p><strong>Region:</strong> {country.region}</p>
-          {country.subregion && <p><strong>Subregion:</strong> {country.subregion}</p>}
-          <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
-          <p><strong>Capital:</strong> {country.capital}</p>
+
+          <p>
+            <strong>Region:</strong> {country.region || "N/A"}
+          </p>
+
+          {country.subregion && (
+            <p>
+              <strong>Subregion:</strong> {country.subregion}
+            </p>
+          )}
+
+          <p>
+            <strong>Population:</strong>{" "}
+            {country.population ? country.population.toLocaleString() : "N/A"}
+          </p>
+
+          <p>
+            <strong>Capital:</strong>{" "}
+            {country.capital && country.capital.length > 0
+              ? country.capital[0]
+              : "N/A"}
+          </p>
 
           {/* View Count */}
-          <p><strong>Views:</strong> {viewCount}</p>
+          <p>
+            <strong>Views:</strong> {viewCount}
+          </p>
 
           {/* Save Button */}
           {!isSaved ? (
@@ -114,14 +135,16 @@ export default function CountryDetail({ countries }) {
               <div className="border-buttons">
                 {country.borders.map((code) => {
                   const borderCountry = countries.find((c) => c.cca3 === code);
-                  return borderCountry && (
-                    <Link
-                      key={code}
-                      to={`/CountryDetail/${borderCountry.name.common}`}
-                      className="border-button"
-                    >
-                      {borderCountry.name.common}
-                    </Link>
+                  return (
+                    borderCountry && (
+                      <Link
+                        key={code}
+                        to={`/CountryDetail/${borderCountry.name.common}`}
+                        className="border-button"
+                      >
+                        {borderCountry.name.common}
+                      </Link>
+                    )
                   );
                 })}
               </div>

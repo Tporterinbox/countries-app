@@ -1,7 +1,9 @@
 
+// --------------------------------------
+
 import { useState, useEffect } from "react";
 
-function SavedCountries() {
+function SavedCountries({ countries }) {
   // ---------------- UseSTATE for SAVED COUNTRIES ----------------
   const [savedCountries, setSavedCountries] = useState([]);
 
@@ -15,15 +17,13 @@ function SavedCountries() {
 
   const [newestUserData, setNewestUserData] = useState(null);
 
-  // ---------------- Handle  Input----------------
+  // ---------------- Handle Input ----------------
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-
-    
-  // ---------------- GET REQUEST for  Get-all-SAVED COUNTRIES ----------------
+  // ---------------- GET SAVED COUNTRIES ----------------
   const getSavedCountries = async () => {
     try {
       const response = await fetch(
@@ -40,7 +40,7 @@ function SavedCountries() {
   const getNewestUserData = async () => {
     try {
       const response = await fetch(
-        "https://backend-answer-keys.onrender.com/get-newest-user",
+        "https://backend-answer-keys.onrender.com/get-newest-user"
       );
       const data = await response.json();
       const user = data[0];
@@ -88,36 +88,60 @@ function SavedCountries() {
     }
   };
 
-  // ---------------- LOAD DATA- ON PAGE LOAD ----------------
+  // ---------------- LOAD DATA ON PAGE LOAD ----------------
   useEffect(() => {
-    getSavedCountries();   
+    getSavedCountries();
     getNewestUserData();
   }, []);
 
   // ---------------- UI/JSX ----------------
   return (
     <>
-      {/* WELCOME MESSAGE */}
-      {newestUserData && (
-        <h2 className="welcome-message">
-          Welcome, {newestUserData.fullName}!
-        </h2>
-      )}
-
-      {/* SAVED COUNTRIES LIST */}
+      
+      {/* SAVED COUNTRIES CARDS */}
       <section className="saved-countries">
-        <h2>Saved Countries</h2>
+        <h2> My Saved Countries</h2>
 
         {savedCountries.length === 0 ? (
-          <p>No saved countries yet.</p>
+          <p>Loading.....</p>
         ) : (
-          <ul>
-            {savedCountries.map((country, index) => (
-              <li key={index}>{country.country_name}</li>
-            ))}
-          </ul>
+          <div className="saved-country-grid">
+            {savedCountries.map((saved, index) => {
+              // Find the full country details from all countries
+              const country = countries.find(
+                (c) => c.name.common === saved.country_name
+              );
+              if (!country) return null;
+
+             
+              return (
+                <div className="country-card" key={index}>
+                  <img
+                    src={country.flags.png}
+                    alt={`Flag of ${country.name.common}`}
+                    className="country-flag"
+                  />
+                  <div className="card-content">
+                    <h2>{country.name.common}</h2>
+                    <p><strong>Region:</strong> {country.region}</p>
+                    <p><strong>Capital:</strong> {country.capital ? country.capital[0] : "N/A"}</p>
+                    <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         )}
       </section>
+  {/* ---------------------- */}
+        {/* WELCOME MESSAGE */}
+        {newestUserData && (
+                <h2 className="welcome-message">
+                  Welcome back, {newestUserData.fullName}!
+                </h2>
+      )}
+{/* --------------------- */}
+
 
       {/* PROFILE FORM */}
       <section className="Form">
