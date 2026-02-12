@@ -30,6 +30,8 @@ This is our WHAT, WHEN, WHERE, HOW framework for working with data:
 📊 FORM DATA
 ==================================
 
+---------------------------------------------------------------------------------
+
 ========================
 🔶 STORING FORM DATA
 ========================
@@ -63,6 +65,7 @@ Step 2: ------Put a post request in it
 Step 3: ------Call the form data storing function from handle submit
 Add more steps as needed!
 
+-----------------------------------------------------------------------------------
 
 ========================/------------------
 🔶 RETRIEVING FORM DATA
@@ -87,7 +90,7 @@ RESPONSE: ------[
   }
 ]
 
-❓ WHEN: ------when the saved countries page loads because this is the ppage where the form is 
+❓ WHEN: ------when the saved countries page loads because this is the page where the form is 
 
 ❓ WHERE: ------ On the saved countries page
 
@@ -99,6 +102,8 @@ Step 3: ------we will use useEffect to call the function getNewestData on page l
 step 4:Render the newest user's name to the screen in JSX.
 Add more steps as needed!
 
+
+------------------------------------------------------------------------------------
 
 
 ===================================/---------
@@ -125,13 +130,16 @@ RESPONSE: ------>  Success! The country is saved.
 
 ❓ WHEN: ------ When user clicks save button 
 
-❓ WHERE: ------
+❓ WHERE: ------on the SavedCountries Page
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
+Step 1: ------Write a function for storing from data and name it 
+Step 2: ------Put a post request in it 
+Step 3: ------Call the Saved Countries  storing function
 Add more steps as needed!
+
+
+------------------------------------------------------------------------------------
 
 ========================
 🔶 RETRIEVING SAVED COUNTRIES DATA
@@ -156,15 +164,27 @@ RESPONSE: ------
   }
 ]
 
-❓ WHEN: ---->
+❓ WHEN: ----> When the saved countires page loads 
 
-❓ WHERE: ---->
+❓ WHERE: ----> on saved countries page 
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
+Step 1: ------user clicks saved countries 
+Step 2: ------Make a function called getSavedCountries = async () =>  async function-, 
+uses fetch to send a get request to the endpoint called /get-all-saved-countries.
+Step 3: ------we will use useEffect to call the function getSavedCountries(); on page loading
+    useEffect(() => {
+    getSavedCountries();   
+    getNewestUserData();
+  }, []);
+  Step 4: Render saved countries to the page
 Add more steps as needed!
+
+
+
+---------------------------------------------------------------------------------
+
+
 
 =================================
 📊 COUNTRY COUNTS DATA
@@ -190,12 +210,17 @@ RESPONSE: ------
 {
   "count": 3
 }
-❓ WHEN: ------
+❓ WHEN: ------When the country detail page loads 
 
-❓ WHERE: ------
+❓ WHERE: ------ Country detail page 
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
+Step 1: ------user clicks country, country detail page populates, 
+
+Step 2: ------Make a function called updateViewCount = async () =>  async function-, 
+make a post request in it 
+Step 3: ------ we will use useEffect to call the function  updateViewCount(); on page loading
+useEffect(() => {
+    updateViewCount();
+  }, 
 Add more steps as needed!
