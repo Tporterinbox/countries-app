@@ -1,0 +1,351 @@
+/* ---------- GOOGLE FONT ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap");
+
+/* ---------- GLOBAL ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  cursor: pointer;
+  background-color: #fafafa;
+  font-family: "Nunito Sans";
+}
+
+/* ---------- HEADER ---------- */
+.header {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+}
+
+.header h1 a,
+.header p a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Hidden nav */
+.nav {
+  display: none;
+}
+
+/* ---------- CARDS GRID ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding: 20px;
+}
+
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card {
+  height: 410px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 40px;
+}
+
+.card:hover {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+  transform: none;
+}
+
+.card-logo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 10px 10px 0 0;
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+}
+
+.card-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-family: "Nunito Sans";
+  margin-left: 10px;
+}
+
+.card-content h2 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+
+.card-content p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+/* ---------- CARDS RESPONSIVE ---------- */
+@media (max-width: 1200px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px)  { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .cards { grid-template-columns: 1fr; } }
+
+/* ---------- TITLES ---------- */
+.Titles {
+  margin-left: 15px;
+  padding: 20px;
+  font-size: small;
+}
+
+/* ---------- FORM STYLING ---------- */
+form {
+  width: 500px;
+  margin-left: 15px;
+  padding: 20px;
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 400px;
+  cursor: arrow;
+}
+
+form button {
+  margin-top: 10px;
+  padding: 10px;
+  cursor: pointer;
+  width: 100px;
+  background-color: #7672ce;
+  font-weight: normal;
+  color: #fff;
+  border: #7672ce;
+  border-radius: 10px;
+}
+
+form input, form textarea {
+  width: 460px;
+  border-radius: 10px;
+  border: #858585;
+  padding: 20px;
+  font-family: "Nunito Sans";
+}
+
+form textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+/* ---------- SEARCH BAR ---------- */
+.search-container {
+  padding: 20px;
+}
+
+.search-container input {
+  width: 300px;
+  max-width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-family: "Nunito Sans";
+}
+
+/* ---------- SEARCH + REGION FILTER ---------- */
+.filters {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.filters select {
+  margin-left: auto;
+}
+
+.filters input,
+.filters select {
+  width: 260px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-family: "Nunito Sans";
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filters input,
+  .filters select {
+    width: 100%;
+  }
+}
+
+/* ---------- COUNTRY DETAIL ---------- */
+.country-detail-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  align-items: flex-start;
+}
+
+/* .country-flag {
+  object-fit: cover;
+} */
+
+.country-flag {
+  width: 750px;
+  max-width: 100%;
+  height: auto;       /* important! preserves aspect ratio */
+  border-radius: 10px;
+  object-fit: contain;
+  margin-left: 20px;
+}
+
+
+.country-details {
+  flex: 1;
+  min-width: 250px;
+}
+
+.country-details h2 {
+  margin-top: 0;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.country-details p {
+  margin: 5px 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* ---------- BORDERING COUNTRIES ---------- */
+/* .border-countries { margin-top: 20px; }
+.border-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+} */
+
+/* Bordering country buttons */
+.border-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+
+.border-button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: grey;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+.border-button:hover { background-color: #ccc; }
+
+/* ---------- BACK BUTTON ---------- */
+.back-button {
+  margin: 30px;
+  margin-bottom: 20px;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+  background-color: grey;
+  color: #fff;
+  font-family: "Nunito Sans";
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.back-button:hover {
+  background-color: #ccc;
+  transform: scale(1.05);
+}
+
+/* ---------- SAVE BUTTON ---------- */
+.save-button {
+  width: 100px;
+  padding: 10px;
+  background-color: grey;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Nunito Sans";
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.save-button:hover {
+  background-color:#ccc;;
+  transform: scale(1.05);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .country-detail-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  .country-details { text-align: center; }
+  .border-buttons { justify-content: center; }
+}
+
+@media (max-width: 600px) {
+  .search-container input,
+  .filters input,
+  .filters select {
+    width: 100%;
+  }
+}
+
+
+/* ------------------------- */
+
+.saved-country-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 20px;
+}
+
+.country-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.country-card img.country-flag {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
