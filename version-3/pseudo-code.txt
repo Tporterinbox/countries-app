@@ -106,7 +106,6 @@ ____________________________
 🔹 POST /unsave-one-country  
 Description: Unsaves a country if it has been saved.  
 Your SQL command:
-
 DELETE FROM saved_countries
 WHERE country_name ='Brazil'; 
 
@@ -122,7 +121,7 @@ ____________________________
 Description: Updates (or initializes) the view count for a country.  
 Your SQL command:
 
- INSERT INTO country_counts(country_name, count)
+ // INSERT INTO country_counts(country_name, count)
  VALUES
  ('Ethiopia', 1)
  ON CONFLICT (country_name)
@@ -131,4 +130,11 @@ Your SQL command:
  RETURNING count;
 
 
+ INSERT INTO country_counts(country_name, count)
+  VALUES
+ ('Ethiopia', 1)
+ ON CONFLICT (country_name)
+ DO UPDATE
+ SET count= country_counts.count+1
+ RETURNING count;
 ____________________________
