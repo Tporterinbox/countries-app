@@ -72,11 +72,13 @@ async function getNewestUser() {
 
 //  2) --> saveOneCountry   Helper Function
 
- async function saveOneCountry(country_name) {
+async function saveOneCountry(country_name) {
   const result = await db.query(
-    
-    `INSERT INTO saved_countries(country_name)
-    VALUES ('Mexico') ON CONFLICT (country_name) DO NOTHING;`
+    `INSERT INTO saved_countries (country_name)
+     VALUES ($1)
+     ON CONFLICT (country_name) DO NOTHING
+     RETURNING *;`,
+    [country_name]
   );
 
   return result.rows[0];
@@ -105,31 +107,17 @@ async function getAllSavedCountries() {
 
 async function updateOneCountryCount(country_name) {
   try {
-    // Try to increment count if the country exists
     const result = await db.query(
-      `INSERT INTO country_counts(country_name, count)
- VALUES
- ('Ethiopia', 1)
- ON CONFLICT (country_name)
- DO UPDATE
- SET count= country_counts.count+1
- RETURNING count;`,
-      // [country_name]
+      `INSERT INTO country_counts (country_name, count)
+       VALUES ($1, 1)
+       ON CONFLICT (country_name)
+       DO UPDATE SET count = country_counts.count + 1
+       RETURNING count;`,
+      [country_name]
     );
 
-    // If country does not exist, insert it with count = 1
-    if (result.rows.length === 0) {
-      const countryCounted = await db.query(
-        `INSERT INTO saved_countries (country_name, count)
-         VALUES ($1, 1)
-         RETURNING *;`,
-        [country_name]
-      );
-      return countryCounted.rows[0];
-    }
-
-    // Return the updated row
     return result.rows[0];
+
   } catch (error) {
     console.error("Error updating country count:", error);
     throw error;
@@ -141,8 +129,8 @@ async function updateOneCountryCount(country_name) {
 
   // --Form Data Endpoints--- 
 
-  //  1) /add-one-use  Endpoint
-  app.post("/add-one-user", async (req, res) => {
+  //  1) /add-one-user  Endpoint
+  app.post("/api/add-one-user", async (req, res) => {
     const {
         name,
         country_name,
@@ -168,7 +156,7 @@ async function updateOneCountryCount(country_name) {
 
 
 //  1a) /get-newest-user  Endpoint 
-  app.get("/get-newest-user", async (req, res) => {
+  app.get("/api/get-newest-user", async (req, res) => {
     
     const user = await getNewestUser();
   
@@ -193,24 +181,27 @@ async function updateOneCountryCount(country_name) {
 
 // 2) /save-one-country Endpoint 
 
-app.post("/save-one-country", async (req, res) => {
-  const {
-      country_name,    
-  } = req.body;
+app.post("/api/save-one-country", async (req, res) => {
+  const { country_name } = req.body;
 
-  const user = await saveOneCountry(
-      
-      country_name
-  );
-  res.send(`Success!The country is saved.`);
+  try {
+    const saved = await saveOneCountry(country_name);
 
+    res.json({
+      message: "Country saved successfully",
+      country: saved,
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to save country" });
+  }
 });
-
 // ------------------------
 
 //  2a) /get-all-saved-countries Endpoint 
 
-app.get("/get-all-saved-countries", async (req, res) => {
+app.get("/api/get-all-saved-countries", async (req, res) => {
   const countries = await getAllSavedCountries();
   res.json(countries);
 });
@@ -223,7 +214,7 @@ app.get("/get-all-saved-countries", async (req, res) => {
 // Increment count by 1
  
 // -------------------Endpoint for Country Count -----------------
-app.post("/update-one-country-count", async (req, res) => {
+app.post("/api/update-one-country-count", async (req, res) => {
   const { country_name } = req.body;
 
   if (!country_name) {
@@ -232,7 +223,11 @@ app.post("/update-one-country-count", async (req, res) => {
 
   try {
     const updatedCountry = await updateOneCountryCount(country_name);
-    res.json(updatedCountry); // return updated country info
+
+    res.json({
+      count: updatedCountry.count,
+    });
+
   } catch (err) {
     console.error("Error updating country count in endpoint:", err);
     res.status(500).send("Error updating country count");

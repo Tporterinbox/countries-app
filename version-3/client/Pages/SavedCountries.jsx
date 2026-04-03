@@ -1,13 +1,7 @@
-
-// --------------------------------------
-
 import { useState, useEffect } from "react";
 
 function SavedCountries({ countries }) {
-  // ---------------- UseSTATE for SAVED COUNTRIES ----------------
   const [savedCountries, setSavedCountries] = useState([]);
-
-  // ---------------- USESTATE  for User Profile----------------
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -26,10 +20,11 @@ function SavedCountries({ countries }) {
   // ---------------- GET SAVED COUNTRIES ----------------
   const getSavedCountries = async () => {
     try {
-      const response = await fetch(
-        "/api/get-all-saved-countries"
-      );
+      const response = await fetch("/api/get-all-saved-countries");
       const data = await response.json();
+
+      console.log("Saved countries from DB:", data); // 🔍 DEBUG
+
       setSavedCountries(data);
     } catch (error) {
       console.error("Error fetching saved countries:", error);
@@ -39,42 +34,39 @@ function SavedCountries({ countries }) {
   // ---------------- GET NEWEST USER ----------------
   const getNewestUserData = async () => {
     try {
-      const response = await fetch(
-       "/api/get-newest-user"
-      );
+      const response = await fetch("/api/get-newest-user");
       const data = await response.json();
-      const user = data[0];
+
+      if (!data) return;
 
       setNewestUserData({
-        fullName: user.name,
-        email: user.email,
-        country: user.country_name,
-        bio: user.bio,
+        fullName: data.name,
+        email: data.email,
+        country: data.country_name,
+        bio: data.bio,
       });
     } catch (error) {
       console.error("Error fetching newest user:", error);
     }
   };
 
-  // ---------- POST REQUEST add-one-user / USER PROFILE ----------------
+  // ---------------- SUBMIT USER ----------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await fetch(
-        "api/add-one-user",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.fullName,
-            email: formData.email,
-            country_name: formData.country,
-            bio: formData.bio,
-          }),
-          
-        }
-      );
+      const response = await fetch("/api/add-one-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          country_name: formData.country,
+          bio: formData.bio,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Failed to save user");
 
       setFormData({
         fullName: "",
@@ -89,44 +81,60 @@ function SavedCountries({ countries }) {
     }
   };
 
-  // ---------------- LOAD DATA ON PAGE LOAD ----------------
+  // ---------------- LOAD DATA ----------------
   useEffect(() => {
     getSavedCountries();
     getNewestUserData();
   }, []);
 
-  // ---------------- UI/JSX ----------------
   return (
     <>
-      
-      {/* SAVED COUNTRIES CARDS */}
+      {/* ---------------- SAVED COUNTRIES ---------------- */}
       <section className="saved-countries">
-        <h2> My Saved Countries</h2>
+        <h2>My Saved Countries</h2>
 
         {savedCountries.length === 0 ? (
-          <p>Loading.....</p>
+          <p>Loading...</p>
         ) : (
           <div className="saved-country-grid">
             {savedCountries.map((saved, index) => {
-              // Find the full country details from all countries
+              // 🔴 IMPORTANT FIX: safer matching
               const country = countries.find(
-                (c) => c.name.common === saved.country_name
+                (c) =>
+                  c.name.common.toLowerCase() ===
+                  saved.country_name?.toLowerCase()
               );
-              if (!country) return null;
 
-             
+              // 🔍 DEBUG fallback (so you SEE missing matches)
+              if (!country) {
+                return (
+                  <div key={index} className="country-card">
+                    <p>Not found: {saved.country_name}</p>
+                  </div>
+                );
+              }
+
               return (
                 <div className="country-card" key={index}>
                   <img
                     src={country.flags.png}
-                    alt={`Flag of ${country.name.common}`}
+                    alt={country.name.common}
                     className="country-flag"
                   />
+
                   <div className="card-content">
                     <h2>{country.name.common}</h2>
-                    <p><strong>Region:</strong> {country.region}</p>
-                    <p><strong>Capital:</strong> {country.capital ? country.capital[0] : "N/A"}</p>
-                    <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
+                    <p>
+                      <strong>Region:</strong> {country.region}
+                    </p>
+                    <p>
+                      <strong>Capital:</strong>{" "}
+                      {country.capital ? country.capital[0] : "N/A"}
+                    </p>
+                    <p>
+                      <strong>Population:</strong>{" "}
+                      {country.population.toLocaleString()}
+                    </p>
                   </div>
                 </div>
               );
@@ -134,17 +142,15 @@ function SavedCountries({ countries }) {
           </div>
         )}
       </section>
-  {/* ---------------------- */}
-        {/* WELCOME MESSAGE */}
-        {newestUserData && (
-                <h2 className="welcome-message">
-                  Welcome back, {newestUserData.fullName}!
-                </h2>
+
+      {/* ---------------- WELCOME ---------------- */}
+      {newestUserData && (
+        <h2 className="welcome-message">
+          Welcome back, {newestUserData.fullName}!
+        </h2>
       )}
-{/* --------------------- */}
 
-
-      {/* PROFILE FORM */}
+      {/* ---------------- FORM ---------------- */}
       <section className="Form">
         <h2>My Profile</h2>
 
