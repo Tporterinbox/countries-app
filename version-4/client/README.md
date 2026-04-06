@@ -11,6 +11,9 @@ Here's the link to view the live app: https://countries-app-version-4-tee.netlif
 🖼️ --Screenshots--
 Here is where I have included a screenshot of my project
 
+<img width="850" height="500" alt="Screenshot 2026-04-06 at 1 01 03 AM" src="https://github.com/user-attachments/assets/7d71ba70-f888-4848-af6f-1e222f978d9d" />
+
+
 <------------------------------------------------------->
 
 ✨--Features--:
