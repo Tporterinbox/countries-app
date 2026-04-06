@@ -6,7 +6,8 @@ Project's Title — Countries App
 This project is - A countries app designed to share information about different countries around the world.
 
 🚀 --Live Site--
-Here's the link to view the live app: https://countries-app-version-4-tee.netlify.app/SavedCountries
+Here's the link to view the live app: https://countries-app-version-4-tee.netlify.app/
+
 
 🖼️ --Screenshots--
 Here is where I have included a screenshot of my project
