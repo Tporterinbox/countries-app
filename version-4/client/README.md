@@ -40,7 +40,7 @@ Frontend
 Languages: JavaScript
 Framework: REACT
 Deployment: Github and Netlify
-Server/API:
+Server/API: Node and Express
 
 Languages: \***\*\_\_\_\*\***
 Framework: \***\*\_\_\_\*\***
