@@ -59,7 +59,7 @@ These are the API endpoints I built shown Below:
 // --Form Data Endpoints---
 
  1- /add-one-user Endpoint
-```app.post("/api/add-one-user", async (req, res) => {
+app.post("/api/add-one-user", async (req, res) => {
 const {
 name,
 country_name,
@@ -79,7 +79,7 @@ bio
     // res.send(`Success! ${user.name} has been added!`);
      res.json(user);
 
-});```
+});
 
 // -------------------------
 
