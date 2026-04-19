@@ -62,6 +62,7 @@ These are the API endpoints I built shown Below:
  Form Data Endpoints
 
  /add-one-user Endpoint
+```
 app.post("/api/add-one-user", async (req, res) => {
 const {
 name,
@@ -86,7 +87,7 @@ bio
 
 
 
-  /get-newest-user Endpoint
+
 app.get("/api/get-newest-user", async (req, res) => {
 
     const user = await getNewestUser();
@@ -99,7 +100,7 @@ app.get("/api/get-newest-user", async (req, res) => {
 
 
 
-/save-one-country Endpoint
+
 
 app.post("/api/save-one-country", async (req, res) => {
 const { country_name } = req.body;
@@ -120,7 +121,7 @@ res.status(500).json({ error: "Failed to save country" });
 
 
 
-/get-all-saved-countries Endpoint
+
 
 app.get("/api/get-all-saved-countries", async (req, res) => {
 const countries = await getAllSavedCountries();
@@ -128,12 +129,6 @@ res.json(countries);
 });
 
 
-
-/update-one-country-count
-
-// Increment count by 1
-
-Endpoint for Country Count
 
 app.post("/api/update-one-country-count", async (req, res) => {
 const { country_name } = req.body;
@@ -155,7 +150,7 @@ res.status(500).send("Error updating country count");
 }
 });
 
-
+```
 
 Here's the link to the full API documentation: \***\*\_\_\*\***
 
