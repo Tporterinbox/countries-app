@@ -156,22 +156,7 @@ Here's the link to the full API documentation: \***\*\_\_\*\***
 
 🗄️ Database Schema
 Here’s the SQL I used to create my tables:
-Put your CREATE TABLE statements here!
 
--- -------- users Table ----------
-
--- Create the users table
--- It should have 5 columns:
--- user_id
--- name
--- country_name
--- email
--- bio
-
--- Apply these constraints:
--- PRIMARY KEY: Choose one column that uniquely identifies each user
--- NOT NULL: Use on columns that must always have a value
--- UNIQUE: Use on columns that must have unique values across all users
 
 ```CREATE TABLE users (
 user_id SERIAL PRIMARY KEY,
@@ -192,17 +177,6 @@ VALUES
 
 ('Ainslie', 'Antartica', 'ainslie@aol.com',
 'Hey!');
-```
--- --- saved_countries Table -----
--- Create the saved_countries table
--- It should have 2 columns:
--- saved_country_id
--- country_name
-
--- Apply these constraints:
--- PRIMARY KEY: Choose one column that uniquely identifies each saved country
--- NOT NULL: Use on columns that must always have a value
--- UNIQUE: Use on columns that must have unique values across all saved countries
 
 CREATE TABLE saved_countries (
 saved_country_id SERIAL PRIMARY KEY,
@@ -223,22 +197,6 @@ VALUES
 ('Brazil'),
 ('Mexico');
 
----
-
--- ---- country_counts Table-----
-
----
-
--- Create the country_counts table
--- It should have 3 columns:
--- country_count_id
--- country_name
--- count
-
--- Apply these constraints:
--- PRIMARY KEY: Choose one column that uniquely identifies each country count
--- NOT NULL: Use on columns that must always have a value
--- UNIQUE: Use on columns that must have unique values across all country counts
 
 CREATE TABLE country_counts (
 country_count_id SERIAL PRIMARY KEY,
@@ -246,11 +204,6 @@ country_name VARCHAR NOT NULL UNIQUE,
 count INTEGER
 );
 
--- Insert these 3 countries into the country_counts table:
--- Ethiopia
--- Brazil
--- Mexico
--- Each country's count should start at 1.
 
 INSERT INTO country_counts (country_name,
 count)
@@ -259,8 +212,8 @@ VALUES
 ('Ethiopia', 1),
 ('Brazil', 1),
 ('Mexico', 1);
+```
 
-<------------------------------------------------------>
 
 💭 -Reflections-
 What I learned: How to Create Front End and Backend Connectivity for Countries app
