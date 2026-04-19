@@ -15,10 +15,10 @@ Here is where I have included a screenshot of my project
 <img width="850" height="500" alt="Screenshot 2026-04-06 at 1 01 03 AM" src="https://github.com/user-attachments/assets/7d71ba70-f888-4848-af6f-1e222f978d9d" />
 
 
-<------------------------------------------------------->
 
-✨--Features--:
---This is what you can do on the app--: (Test Case Scenarios)
+
+✨Features:
+This is what you can do on the app: (Test Case Scenarios)
 
 --Form data--
 As a User, when I submit the form, my data should be stored in a PostgreSQL database
@@ -32,7 +32,7 @@ As a User, I should be able to view all saved countries on the Saved Countries p
 As a User, Each time I open a country’s detail page, the view count for that country should increase by 1
 As a User, I should be able to see the total number of times I’ve viewed each country
 
-<-------------------------------------------------------->
+
 
 🛠️ Tech Stack
 Frontend
@@ -40,21 +40,24 @@ Frontend
 Languages: JavaScript
 Framework: REACT
 Deployment: Github and Netlify
+
 Server/API: Node and Express
 
-Languages: \***\*\_\_\_\*\***
-Framework: \***\*\_\_\_\*\***
-Deployment: \***\*\_\_\_\*\***
+Languages: Node.js
+Framework: Express
+Deployment: Render
+Dev Tools: Postman for API Testing
+
 Database
 
-Languages: \***\*\_\_\_\*\***
-Deployment: \***\*\_\_\_\*\***
+Languages: PostgreSQL
+Deployment: Neon
 
-<-------------------------------------------------------->
+
 
 🔹 API Documentation
 These are the API endpoints I built shown Below:
-// -----------------
+
 
 // --Form Data Endpoints---
 
