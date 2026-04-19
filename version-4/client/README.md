@@ -59,9 +59,6 @@ Deployment: Neon
 These are the API endpoints I built shown Below:
 
 
-
-
- /add-one-user Endpoint
 ```
 app.post("/api/add-one-user", async (req, res) => {
 const {
