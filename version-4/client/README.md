@@ -149,7 +149,7 @@ res.status(500).send("Error updating country count");
 
 ```
 
-Here's the link to the full API documentation: 
+Here's the link to the full API documentation: https://restcountries.com/
 
 🗄️ Database Schema
 Here’s the SQL I used to create my tables:
