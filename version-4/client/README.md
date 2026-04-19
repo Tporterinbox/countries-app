@@ -152,7 +152,7 @@ res.status(500).send("Error updating country count");
 
 ```
 
-Here's the link to the full API documentation: \***\*\_\_\*\***
+Here's the link to the full API documentation: 
 
 🗄️ Database Schema
 Here’s the SQL I used to create my tables:
