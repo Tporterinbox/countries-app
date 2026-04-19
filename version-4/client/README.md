@@ -59,9 +59,9 @@ Deployment: Neon
 These are the API endpoints I built shown Below:
 
 
-// --Form Data Endpoints---
+ Form Data Endpoints
 
- 1- /add-one-user Endpoint
+ /add-one-user Endpoint
 app.post("/api/add-one-user", async (req, res) => {
 const {
 name,
@@ -84,9 +84,9 @@ bio
 
 });
 
-// -------------------------
 
-// 1a- /get-newest-user Endpoint
+
+  /get-newest-user Endpoint
 app.get("/api/get-newest-user", async (req, res) => {
 
     const user = await getNewestUser();
@@ -96,21 +96,10 @@ app.get("/api/get-newest-user", async (req, res) => {
 
 });
 
-// ----with error handiling (/get-newest-user)
-// GET endpoint to fetch the newest user
-// app.get("/get-newest-user", async (req, res) => {
-// try {
-// const user = await getNewestUser(); // no parameters needed
-// res.json(user); // send the newest user as JSON
-// } catch (error) {
-// console.error(error);
-// res.status(500).send("Error fetching the newest user");
-// }
-// });
 
-// ------------------------------------
 
-// 2- /save-one-country Endpoint
+
+/save-one-country Endpoint
 
 app.post("/api/save-one-country", async (req, res) => {
 const { country_name } = req.body;
@@ -129,22 +118,23 @@ res.status(500).json({ error: "Failed to save country" });
 }
 });
 
-// -----------------------------------
 
-// 2a- /get-all-saved-countries Endpoint
+
+/get-all-saved-countries Endpoint
 
 app.get("/api/get-all-saved-countries", async (req, res) => {
 const countries = await getAllSavedCountries();
 res.json(countries);
 });
 
-// ----------------------------------
 
-// 3- /update-one-country-count
+
+/update-one-country-count
 
 // Increment count by 1
 
-// -------------------Endpoint for Country Count -----------------
+Endpoint for Country Count
+
 app.post("/api/update-one-country-count", async (req, res) => {
 const { country_name } = req.body;
 
@@ -165,9 +155,9 @@ res.status(500).send("Error updating country count");
 }
 });
 
-<-------------------------------------------------------->
 
-----> Here's the link to the full API documentation: \***\*\_\_\*\***
+
+Here's the link to the full API documentation: \***\*\_\_\*\***
 
 🗄️ Database Schema
 Here’s the SQL I used to create my tables:
@@ -188,7 +178,7 @@ Put your CREATE TABLE statements here!
 -- NOT NULL: Use on columns that must always have a value
 -- UNIQUE: Use on columns that must have unique values across all users
 
-CREATE TABLE users (
+```CREATE TABLE users (
 user_id SERIAL PRIMARY KEY,
 name VARCHAR NOT NULL,
 country_name VARCHAR NOT NULL,
@@ -196,7 +186,7 @@ email VARCHAR NOT NULL UNIQUE,
 bio VARCHAR NOT NULL  
 );
 
--- Insert 3 users into the users table
+
 INSERT INTO users(
 name, country_name, email, bio
 )
@@ -207,7 +197,7 @@ VALUES
 
 ('Ainslie', 'Antartica', 'ainslie@aol.com',
 'Hey!');
-
+```
 -- --- saved_countries Table -----
 -- Create the saved_countries table
 -- It should have 2 columns:
