@@ -180,10 +180,7 @@ saved_country_id SERIAL PRIMARY KEY,
 country_name VARCHAR NOT NULL UNIQUE
 );
 
--- Insert these 3 countries into the saved_countries table:
--- Ethiopia
--- Brazil
--- Mexico
+
 
 INSERT INTO saved_countries (
 country_name
